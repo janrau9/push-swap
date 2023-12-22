@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 08:17:37 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/22 07:06:44 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 11:49:52 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,28 @@
 void	add_stack_index(t_stack **head, int max_num)
 {
 	t_stack	*ptr;
+	int		i;
+	int		center;
 
 	ptr = *head;
+	i = 0;
+	center = ps_lstsize(ptr) / 2;
 	while (ptr)
 	{
-		if (ptr->final_pos < max_num / 2)
-			ptr->chunk_pos = ptr->final_pos;
-		else if (ptr->final_pos >= max_num / 2)
-			ptr->chunk_pos = ptr->final_pos - (max_num / 2);
+		if (ptr->final_pos >= max_num / 2)
+			ptr->final_pos -= (max_num / 2);
+		if (i <= center)
+		{
+			ptr->above = true;
+			ptr->index = i;
+		}
+		else
+		{
+			ptr->above = false;
+			ptr->index = center * 2 - i;
+		}
 		ptr = ptr->next;
+		i++;
 	}
 }
 
