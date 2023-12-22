@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 17:38:09 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/22 09:28:00 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 13:30:32 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_stack	*ps_lstnew(int content)
 	plst->next = NULL;
 	plst->prev = NULL;
 	plst->final_pos = -1;
+	plst->index = -1;
 	// check_final_pos(head, content);
 	return (plst);
 }

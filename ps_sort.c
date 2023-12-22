@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:30:36 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/22 11:40:48 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 15:34:01 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,41 @@ static int	sorted(t_stack **head)
 	return (1);
 }
 
+// static void	rotate(t_stack **head, int i)
+// {
+// 	t_stack	*ptr;
+// 	int		min;
+// 	t_stack	*hold;
+
+// 	ptr = *head;
+// 	min = INT_MAX;
+// 	set_index(head);
+
+// 	while (ptr)
+// 	{
+// 		printf("initial - %d\n", ptr->final_pos);
+// 		ptr = ptr->next;
+// 	}
+// 	ptr = *head;
+
+// 	while (ptr)
+// 	{
+// 		if (((((ptr->final_pos) >> i) & 1) == 0) && ptr->index < min)
+// 		{
+// 			hold = ptr;
+// 			min = ptr->index;
+// 		}
+// 		ptr = ptr->next;
+// 	}
+// 	if (hold->above == true)
+// 		while (hold != *head)
+// 			ra(head);
+// 	else
+// 		while (hold != *head)
+// 			rra(head);
+
+// }
+
 void	sort_big_a(t_stack **a_head, t_stack **b_head, int max_num)
 {
 	int	max_bits;
@@ -67,19 +102,17 @@ void	sort_big_a(t_stack **a_head, t_stack **b_head, int max_num)
 
 	i = 0;
 	max_bits = 0;
-	printf("%d \n", ps_lstsize(*a_head));
 	while ((max_num >> max_bits) != 0)
 		max_bits++;
 	while (!sorted(a_head))
 	{
-		j = 0;
-		while (j < (max_num + 1))
+		j = -1;
+		while (++j < max_num + 1)
 		{
 			if (((((*a_head)->final_pos) >> i) & 1) == 1)
 				ra(a_head);
 			else
 				pb(a_head, b_head);
-			j++;
 		}
 		while (ps_lstsize(*a_head) != max_num + 1)
 			pa(a_head, b_head);
