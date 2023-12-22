@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 08:07:29 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/21 15:46:54 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 09:32:28 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,22 @@ int	main(int argc, char **argv)
 	// }
 	else
 	{
-		split_to_chunks(&a_head, &b_head);
-		sort_big_a(&a_head, &b_head, size);
-		sort_big_b(&a_head, &b_head, size);
-		sort_big_b(&a_head, &b_head, size);
-		sort_big_b(&a_head, &b_head, size);
+		// split_stack(&a_head, &b_head);
+		add_stack_index(&a_head, size);
+		add_stack_index(&b_head, size);
+		sort_big_a(&a_head, &b_head, ps_lstsize(a_head) - 1);
+		// sort_big_b(&a_head, &b_head, ps_lstsize(b_head) - 1);
+		while (ps_lstsize(b_head))
+			pa(&a_head, &b_head);
+		// while (ps_lstsize(b_head))
+		// 	pa(&a_head, &b_head);
+		// split_to_chunks(&a_head, &b_head);
 	}
 	//error check if node is 1
-	// split_half(&a_head, &b_head, stack_size)
 
-	//ps_lstiter_int(a_head, ft_atoi);
-	//rotate(&a_head);
-	//swap(&a_head);
-	// push(&a_head, &b_head);
-	// push(&a_head, &b_head);
-	// printf("%d \n", ps_lstsize(a_head));
-	// rev_rotate(&a_head);
-	// rev_rotate(&a_head);
-	// rotate(&a_head);
-	// rotate(&a_head);
-	// pb(&a_head, &b_head);
-	// pb(&a_head, &b_head);
-	// pb(&a_head, &b_head);
-
-	// ss(&a_head, &b_head);
-	// rr(&a_head, &b_head);
-	// rrr(&a_head, &b_head);
 	while (a_head != NULL)
 	{
+	
 		printf("A - %d | out - %d | A - %d | C - %d \n", a_head->element, a_head->final_pos, a_head->element, a_head->chunk_pos);
 		a_head = a_head->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 07:11:18 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/21 10:46:54 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 09:27:55 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "stdlib.h"
 #include <stdio.h>
+# include <stdbool.h>
 # include "unistd.h"
 # include "limits.h"
 
@@ -23,6 +24,8 @@ typedef struct s_stack
 	int				element;
 	int				final_pos;
 	int				chunk_pos;
+	bool			above;
+	int				index;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }					t_stack;
@@ -52,6 +55,9 @@ void	split_to_chunks(t_stack **a_head, t_stack **b_head);
 void	sort_three(t_stack **head);
 void	sort_big_a(t_stack **a_head, t_stack **b_head, int max_num);
 void	sort_big_b(t_stack **a_head, t_stack **b_head, int max_num);
+void	split_stack(t_stack **a_head, t_stack **b_head);
+void	add_stack_index(t_stack **head, int max_num);
+
 
 int		ps_error(t_stack **head, char **argv, int flag);
 void	free_split(char **argv);

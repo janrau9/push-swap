@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:30:36 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/21 15:40:57 by jberay           ###   ########.fr       */
+/*   Updated: 2023/12/22 09:47:33 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,47 +59,84 @@ void	sort_three(t_stack **head)
 // 	return (1);
 // }
 
-// void	sort_big(t_stack **a_head, t_stack **b_head)
-// {
-// 	int	max_bits;
-// 	int	i;
-// 	int	j;
-// 	int	max_num;
-// 	int	size;
 
-// 	i = -1;
-// 	max_bits = 0;
-// 	max_num = (nbr / 4) - 1;
-// 	size = ps_lstsize(*a_head);
-// 	while ((max_num >> max_bits) != 0)
-// 		max_bits++;
-// 	while (++i < max_bits)
-// 	{
-// 		j = -1;
-// 		while (++j < max_num + 1)
-// 		{
-// 			if (((((*a_head)->chunk_pos) >> i) & 1) == 1)
-// 				ra(a_head);
-// 			else
-// 				pb(a_head, b_head);
-// 		}
-// 		while (ps_lstsize(*a_head) != size)
-// 			pa(a_head, b_head);
-// 	}
-// }
+static void	set_rotation(t_stack **head)
+{
+	int		i;
+	int		centerline;
+	t_stack	*ptr;
 
-void	sort_big_a(t_stack **a_head, t_stack **b_head, int nbr)
+	i = 0;
+	ptr = *head;
+	centerline = ps_lstsize(ptr) / 2;
+	while (ptr)
+	{
+		if (i <= centerline)
+		{
+			ptr->above = true;
+			ptr->index = i;
+		}
+		else
+		{
+			ptr->above = false;
+			ptr->index = centerline * 2 - i;
+		}
+		ptr = ptr->next;
+		++i;
+	}
+}
+
+static t_stack	*rotate(t_stack *head, int i, char name)
+{
+	t_stack	*ptr;
+	t_stack	*hold;
+	long	min;
+	int		call;
+
+	set_rotation(&head);
+	ptr = head;
+	min = INT_MAX;
+	while (ptr)
+	{
+		if ((((ptr->chunk_pos) >> i) & 1) == 1 && ptr->index < min)
+		{
+			hold = ptr;
+			min = ptr->index;
+		}
+		ptr = ptr->next;
+	}
+	call = hold->index;
+	printf("%d %d \n", hold->index, hold->final_pos);
+	if (hold->above == true)
+	{
+
+			if (name == 'a')
+				ra(&head);
+			else
+				rb(&head);
+			call--;
+	}
+	if (hold->above == false)
+	{
+		
+			if (name == 'a')
+				rra(&head);
+			else
+				rrb(&head);
+			call--;
+	}
+	return (head);
+}
+
+void	sort_big_a(t_stack **a_head, t_stack **b_head, int max_num)
 {
 	int	max_bits;
 	int	i;
 	int	j;
-	int	max_num;
-	int	size;
+	t_stack	*temp;
 
 	i = -1;
 	max_bits = 0;
-	max_num = (nbr / 4) - 1;
-	size = ps_lstsize(*a_head);
 	while ((max_num >> max_bits) != 0)
 		max_bits++;
 	while (++i < max_bits)
@@ -107,58 +144,36 @@ void	sort_big_a(t_stack **a_head, t_stack **b_head, int nbr)
 		j = -1;
 		while (++j < max_num + 1)
 		{
-			if (((((*a_head)->chunk_pos) >> i) & 1) == 1)
-				ra(a_head);
-			else
-				pb(a_head, b_head);
+			temp = *a_head;
+			*a_head = rotate(temp, i, 'a');
+			pb(a_head, b_head);
 		}
-		while (ps_lstsize(*a_head) != size)
+		while (ps_lstsize(*a_head) != max_num + 1)
 			pa(a_head, b_head);
 	}
 }
 
-void	sort_big_b(t_stack **a_head, t_stack **b_head, int nbr)
+void	sort_big_b(t_stack **a_head, t_stack **b_head, int max_num)
 {
 	int	max_bits;
 	int	i;
 	int	j;
-	int	max_num;
-	int	size;
-	int	k;
 
-	k = 0;
 	i = -1;
 	max_bits = 0;
-	max_num = (nbr / 4) - 1;
-	size = ps_lstsize(*a_head);
 	while ((max_num >> max_bits) != 0)
 		max_bits++;
-	while (k < nbr / 4)
-	{
-		pa(a_head, b_head);
-		k++;
-	}
 	while (++i < max_bits)
 	{
 		j = -1;
-		k = 0;
 		while (++j < max_num + 1)
 		{
-			if (((((*a_head)->chunk_pos) >> i) & 1) == 1)
-			{
-				ra(a_head);
-				k++;
-			}
+			if (((((*b_head)->chunk_pos) >> i) & 1) == 1)
+				pa(a_head, b_head);
 			else
-				pb(a_head, b_head);
+				rb(b_head);
 		}
-		while (k > 0)
-		{
-			rra(a_head);
-			k--;
-		}
-		while (ps_lstsize(*a_head) != size + nbr / 4)
-			pa(a_head, b_head);
+		while (ps_lstsize(*b_head) != max_num + 1)
+			pb(a_head, b_head);
 	}
 }
-
