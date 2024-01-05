@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 07:31:28 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:18:57 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/04 13:03:13 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ void	init_a(t_stack *a_head, t_stack *b_head)
 	current_index(b_head);
 	find_atob(a_head, b_head);
 	cost(b_head, a_head);
-	// cheapest(a_head);
+	cheapest(a_head);
 }
 

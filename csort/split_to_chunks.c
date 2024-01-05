@@ -6,13 +6,21 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:59:41 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:38:32 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/04 15:21:45 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	chunk_size(int size)
+static int	chunk(int nbr, int size)
+{
+	int	chunk;
+
+	chunk = nbr / size;
+	return (chunk);
+}
+
+static int	chunk_size(int size)
 {
 	int	ch_size;
 
@@ -30,45 +38,16 @@ void	split_to_chunks(t_stack **a_head, t_stack **b_head, int i, int j)
 	size = chunk_size(ps_lstsize(*a_head));
 	while (*a_head && ps_lstsize(*b_head) < (i * 2 * size))
 	{
-		if ((*a_head)->final_pos / size == j + 1)
+		if (chunk((*a_head)->final_pos, size) == j)
 		{
 			pb(a_head, b_head);
 		}
-		else if ((*a_head)->final_pos / size == j)
+		else if (chunk((*a_head)->final_pos, size) == j + 1)
 		{
 			pb(a_head, b_head);
 			rb(b_head);
 		}
 		else
 			ra(a_head);
-	}
-}
-
-void	split_to_chunks_one(t_stack **a_head, t_stack **b_head, int i, int j)
-{
-	int	size;
-	int	rr;
-
-	rr = 0;
-	size = chunk_size(ps_lstsize(*a_head));
-	while (*a_head && ps_lstsize(*b_head) < (i * 2 * size))
-	{
-		if ((*a_head)->final_pos / size == j)
-		{
-			pb(a_head, b_head);
-		}
-		else if ((*a_head)->final_pos / size == j + 1)
-		{
-			pb(a_head, b_head);
-			rb(b_head);
-			rr++;
-		}
-		else
-			ra(a_head);
-	}
-	while (rr > 0)
-	{
-		rrb(b_head);
-		rr--;
 	}
 }

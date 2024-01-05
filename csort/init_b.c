@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 08:14:11 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:37:15 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/04 10:37:02 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	cost(t_stack *a_head, t_stack *b_head)
 	}
 }
 
-void	cheapest(t_stack *head, int size, int j)
+void	cheapest(t_stack *head)
 {
 	long	cheapest;
 	t_stack	*hold;
@@ -92,8 +92,7 @@ void	cheapest(t_stack *head, int size, int j)
 	cheapest = LONG_MAX;
 	while (head)
 	{
-		if (head->push_cost < cheapest
-			&& head->final_pos / size == j)
+		if (head->push_cost < cheapest)
 		{
 			cheapest = head->push_cost;
 			hold = head;
@@ -103,16 +102,11 @@ void	cheapest(t_stack *head, int size, int j)
 	hold->cheapest = true;
 }
 
-void	init_b(t_stack *a_head, t_stack *b_head, int size)
+void	init_b(t_stack *a_head, t_stack *b_head)
 {
-	int	chunk;
-	int	j;
-
 	current_index(a_head);
 	current_index(b_head);
 	find_btoa(a_head, b_head);
 	cost(a_head, b_head);
-	chunk = chunk_size(size);
-	j = (ps_lstsize(b_head) - 1 )/ chunk;
-	cheapest(b_head, chunk, j);
+	cheapest(b_head);
 }

@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:30:36 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:21:23 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/04 15:33:19 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	sort_five(t_stack **a_head, t_stack **b_head)
 	sort_three(a_head);
 	while (*b_head)
 	{
-		init_b(*a_head, *b_head, 5);
+		init_b(*a_head, *b_head);
 		push_btoa(a_head, b_head);
 	}
 	current_index(*a_head);
@@ -114,26 +114,40 @@ void	sort_big(t_stack **a_head, t_stack **b_head)
 	t_stack	*max;
 	int		size;
 
-
 	i = 1;
 	j = 0;
 	size = ps_lstsize(*a_head);
-	split_to_chunks(a_head, b_head, i, j);
 	while (*a_head)
 	{
+		split_to_chunks(a_head, b_head, i, j);
 		i++;
 		j = j + 2;
-		split_to_chunks_one(a_head, b_head, i, j);
 	}
 	max = find_max(*b_head);
 	max->cheapest = true;
 	current_index(*b_head);
 	prep_for_push(b_head, max, 'b');
 	pa(a_head, b_head);
-	while (*b_head)
+	if (size <= 100)
 	{
-		init_b(*a_head, *b_head, size);
-		push_btoa(a_head, b_head);
+		while (*b_head)
+		{
+			max = find_max(*b_head);
+			max->cheapest = true;
+			current_index(*b_head);
+			prep_for_push(b_head, max, 'b');
+			pa(a_head, b_head);
+			// init_b(*a_head, *b_head);
+			// push_btoa(a_head, b_head);
+		}
+	}
+	else
+	{
+		while (*b_head)
+		{
+			init_b(*a_head, *b_head);
+			push_btoa(a_head, b_head);
+		}
 	}
 	current_index(*a_head);
 	min_top(a_head);
