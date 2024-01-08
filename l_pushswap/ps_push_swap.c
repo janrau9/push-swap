@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:39:18 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 12:23:09 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 11:02:38 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	push_btoa(t_stack **a_head, t_stack **b_head)
 	prep_for_push(a_head, cheapest->target, 'a');
 	prep_for_push(b_head, cheapest, 'b');
 	pa(a_head, b_head, false);
+	if (cheapest->target == *a_head)
+		ra(a_head, false);
 }
 
 void	min_top(t_stack **a_head)

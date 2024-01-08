@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 12:59:41 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/08 10:13:13 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:59:47 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ void	split_to_chunks(t_stack **a_head, t_stack **b_head, int i, int j)
 	while (*a_head && ps_lstsize(*b_head) < (i * 2 * size))
 	{
 		if ((*a_head)->final_pos / size == j + 1)
-		{
 			pb(a_head, b_head, false);
-		}
 		else if ((*a_head)->final_pos / size == j)
 		{
 			pb(a_head, b_head, false);

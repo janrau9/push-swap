@@ -6,11 +6,10 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 11:40:41 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/08 07:09:27 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:27:09 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft/libft.h"
 #include "pushswap.h"
 

@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/11 07:11:18 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 13:15:43 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:45:39 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	sort_final_pos(t_stack **head);
 t_stack	*find_max(t_stack *head);
 t_stack	*find_min(t_stack *head);
 t_stack	*get_cheapest(t_stack *head);
-
 void	split_to_chunks(t_stack **a_head, t_stack **b_head, int i, int j);
 void	split_to_chunks_one(t_stack **a_head, t_stack **b_head, int i, int j);
 int		chunk_size(int size);

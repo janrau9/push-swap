@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 12:11:23 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 15:24:53 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:27:59 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
+
 
 char	*get_next_line(int fd);
 #endif

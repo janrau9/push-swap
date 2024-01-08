@@ -6,13 +6,11 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 12:05:42 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/08 08:59:29 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:27:50 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-#include "../pushswap.h"
-#include "../libft/libft.h"
 
 static void	on_error(t_stack **a, t_stack **b)
 {
