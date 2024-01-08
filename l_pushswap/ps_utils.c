@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 08:17:37 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:37:47 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/05 11:37:24 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/05 11:37:26 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,18 @@ t_stack	*get_cheapest(t_stack *head)
 		head = head->next;
 	}
 	return (NULL);
+}
+
+int	sorted(t_stack *head)
+{
+	t_stack	*ptr;
+
+	ptr = head;
+	while (ptr->next)
+	{
+		if (ptr->final_pos > ptr->next->final_pos)
+			return (0);
+		ptr = ptr->next;
+	}
+	return (1);
 }

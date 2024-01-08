@@ -5,69 +5,48 @@
 #                                                     +:+ +:+         +:+      #
 #    By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/07 11:38:23 by jberay            #+#    #+#              #
-#    Updated: 2024/01/08 09:29:21 by jberay           ###   ########.fr        #
+#    Created: 2024/01/05 15:06:11 by jberay            #+#    #+#              #
+#    Updated: 2024/01/05 15:21:26 by jberay           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=	push_swap
-NAME_LIB		=	push_swap_lib.a
-
+NAME			=	checker
 
 CC				=	cc
 CFLAGS			=	-Wall -Wextra -Werror
 RM				=	rm -rf
+PS_LIB			=	../push_swap_lib.a
 
-SRCS 			=	ps_main.c \
-					ps_lstnew.c \
-					ps_lstadd_back.c \
-					ps_lstsize.c \
-					ps_lstlast.c \
-					ps_error.c \
-					ps_initialize.c \
-					ps_push_op.c \
-					ps_rev_rotate_op.c \
-					ps_rotate_op.c \
-					ps_swap_op.c \
-					ps_sort.c \
-					ps_utils.c \
-					init_b.c \
-					split_to_chunks.c \
-					ps_push_swap.c
-	
+SRCS 			=	checker_bonus.c \
+					get_next_line.c
+
 OBJS			=	$(SRCS:%.c=%.o)
 
-LIBFT_PATH		=	./libft
+LIBFT_PATH		=	../libft
 LIBFT			=	$(LIBFT_PATH)/libft.a
+
+%.o:%.c
+					$(CC) $(CFLAGS) -c $< -o $@	
+
 
 all:				$(NAME)
 
-$(NAME):			$(LIBFT) $(OBJS) $(NAME_LIB)
-					$(CC) $(CFLAGS) $(LIBFT) $(OBJS) -o $(NAME) 
+$(NAME):			$(OBJS) $(PS_LIB)
+					$(CC) $(CFLAGS) $(LIBFT) $(OBJS) $(PS_LIB) -o $(NAME)
+					cp $(NAME) ../	
 
-$(NAME_LIB):		$(OBJS)
-					ar -rcs $(NAME_LIB) $^
-					ar -d $(NAME_LIB) ps_main.o
-					
-%.o:%.c
-					$(CC) $(CFLAGS) -c $< -o $@		
-							
+$(PS_LIB):			
+					cd ../ && make
+
 $(LIBFT):
 					make -C $(LIBFT_PATH) all
 
-bonus:
-					cd ./bns && make
-
 clean:
-					make -C $(LIBFT_PATH) clean
-					cd ./bns && make clean
 					$(RM) $(OBJS)
-					$(RM) $(NAME_LIB)
 
 fclean:				clean
-					make -C $(LIBFT_PATH) fclean
 					$(RM) $(NAME)
-					cd ./bns && make fclean
+					cd ../ && $(RM) $(NAME)
 
 re:					fclean all
 

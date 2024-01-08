@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/28 08:14:11 by jberay            #+#    #+#             */
-/*   Updated: 2024/01/05 08:37:15 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/05 11:40:56 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/05 11:40:57 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	cost(t_stack *a_head, t_stack *b_head)
 
 	size_a = ps_lstsize(a_head);
 	size_b = ps_lstsize(b_head);
-
 	while (b_head)
 	{
 		b_head->push_cost = b_head->index;
@@ -113,6 +112,6 @@ void	init_b(t_stack *a_head, t_stack *b_head, int size)
 	find_btoa(a_head, b_head);
 	cost(a_head, b_head);
 	chunk = chunk_size(size);
-	j = (ps_lstsize(b_head) - 1 )/ chunk;
+	j = (ps_lstsize(b_head) - 1) / chunk;
 	cheapest(b_head, chunk, j);
 }

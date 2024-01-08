@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 07:26:41 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/20 07:46:08 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/05 11:38:12 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/08 09:45:51 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,33 +23,38 @@
 
 static void	swap(t_stack **head)
 {
-	if (ps_lstsize(*head) > 1 || *head != NULL)
-	{
-		*head = (*head)->next;
-		(*head)->prev->prev = *head;
-		(*head)->prev->next = (*head)->next;
-		if ((*head)->next)
-			(*head)->next->prev = (*head)->prev;
-		(*head)->next = (*head)->prev;
-		(*head)->prev = NULL;
-	}
+	int	size;
+
+	size = ps_lstsize(*head);
+	if (size == 1 || *head == NULL)
+		return ;
+	*head = (*head)->next;
+	(*head)->prev->prev = *head;
+	(*head)->prev->next = (*head)->next;
+	if ((*head)->next)
+		(*head)->next->prev = (*head)->prev;
+	(*head)->next = (*head)->prev;
+	(*head)->prev = NULL;
 }
 
-void	sa(t_stack **a_head)
+void	sa(t_stack **a_head, bool print)
 {
 	swap(a_head);
-	write(1, "sa\n", 3);
+	if (!print)
+		write(1, "sa\n", 3);
 }
 
-void	sb(t_stack **b_head)
+void	sb(t_stack **b_head, bool print)
 {
 	swap(b_head);
-	write(1, "sb\n", 3);
+	if (!print)
+		write(1, "sb\n", 3);
 }
 
-void	ss(t_stack **a_head, t_stack **b_head)
+void	ss(t_stack **a_head, t_stack **b_head, bool print)
 {
 	swap(a_head);
 	swap(b_head);
-	write(1, "ss\n", 3);
+	if (!print)
+		write(1, "ss\n", 3);
 }

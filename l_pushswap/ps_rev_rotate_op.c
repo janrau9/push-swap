@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/14 07:30:31 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/20 07:50:42 by jberay           ###   ########.fr       */
+/*   Created: 2024/01/05 11:38:56 by jberay            #+#    #+#             */
+/*   Updated: 2024/01/05 12:17:50 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,24 @@ static void	rev_rotate(t_stack **head)
 	last->next->prev = last;
 }
 
-void	rra(t_stack **head)
+void	rra(t_stack **head, bool print)
 {
 	rev_rotate(head);
-	write(1, "rra\n", 4);
+	if (!print)
+		write(1, "rra\n", 4);
 }
 
-void	rrb(t_stack **head)
+void	rrb(t_stack **head, bool print)
 {
 	rev_rotate(head);
-	write(1, "rrb\n", 4);
+	if (!print)
+		write(1, "rrb\n", 4);
 }
 
-void	rrr(t_stack **a_head, t_stack **b_head)
+void	rrr(t_stack **a_head, t_stack **b_head, bool print)
 {
 	rev_rotate(a_head);
 	rev_rotate(b_head);
-	write(1, "rrr\n", 4);
+	if (!print)
+		write(1, "rrr\n", 4);
 }

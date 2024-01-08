@@ -6,7 +6,7 @@
 /*   By: jberay <jberay@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 13:59:58 by jberay            #+#    #+#             */
-/*   Updated: 2023/12/28 09:12:37 by jberay           ###   ########.fr       */
+/*   Updated: 2024/01/08 08:34:52 by jberay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@ void	ps_lstclear(t_stack **lst)
 	t_stack	*ptr;
 	t_stack	*temp;
 
-	if (lst)
+	if (*lst == NULL)
+		return ;
+	ptr = *lst;
+	while (ptr != NULL)
 	{
-		ptr = *lst;
-		while (ptr != NULL)
-		{
-			temp = ptr;
-			ptr = ptr->next;
-			free(temp);
-		}
-		*lst = NULL;
+		temp = ptr;
+		ptr = ptr->next;
+		free(temp);
 	}
+	*lst = NULL;
 }
 
 void	free_split(char **argv)
@@ -45,7 +44,7 @@ void	free_split(char **argv)
 int	ps_error(t_stack **head, char **argv, int flag)
 {
 	ps_lstclear(head);
-	if (flag == 1)
+	if (flag == 0)
 		free_split(argv);
 	write(2, "Error\n", 6);
 	exit(1);
